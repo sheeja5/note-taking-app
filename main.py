@@ -46,7 +46,7 @@ if selected_subject:
     st.header(f"Notes for {selected_subject}")
 
     # Text area for adding a new note
-    new_note = st.text_area("Add a new note:", value=st.session_state.new_note, key="new_note")
+    new_note = st.text_area("Add a new note:")
     if st.button("Save Note"):
         if new_note:
             notes[selected_subject].append(new_note)
