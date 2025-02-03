@@ -23,7 +23,7 @@ if "new_note" not in st.session_state:
 
 # Streamlit app
 st.title("Note Taking App")
-st.write("Supporting Noty portal")
+
 # Sidebar for selecting subject/preference
 st.sidebar.header("Subjects/Preferences")
 subject = st.sidebar.text_input("Enter a new subject/preference:")
@@ -40,11 +40,11 @@ if st.sidebar.button("Add Subject/Preference"):
 
 # Dropdown to select existing subject/preference
 selected_subject = st.sidebar.selectbox("Select a subject/preference:", list(notes.keys()))
-
+st.write("**Supporting Noty portal**")
 # Main area for adding and viewing notes
 if selected_subject:
     st.header(f"Notes for {selected_subject}")
-
+    
     # Text area for adding a new note
     new_note = st.text_area("Add a new note:")
     if st.button("Save Note"):
