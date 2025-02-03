@@ -40,7 +40,7 @@ if st.sidebar.button("Add Subject/Preference"):
 
 # Dropdown to select existing subject/preference
 selected_subject = st.sidebar.selectbox("Select a subject/preference:", list(notes.keys()))
-st.write("**Supporting Noty portal as well  by (Abel and Devansh)**")
+st.write("**Supporting Noty portal as well  by (Abel)**")
 # Main area for adding and viewing notes
 if selected_subject:
     st.header(f"Notes for {selected_subject}")
