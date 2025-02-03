@@ -8,13 +8,15 @@ def load_notes():
         with open("notes.json", "r") as file:
             return json.load(file)
     return {}
-notes = load_notes()
-#Function to save notes to a file
+
+# Function to save notes to a file
 def save_notes(notes):
     with open("notes.json", "w") as file:
         json.dump(notes, file, indent=4)  # Added indent for better readability
 
 # Load existing notes
+notes = load_notes()
+
 # Streamlit app
 st.title("Note Taking App")
 
@@ -49,9 +51,18 @@ if selected_subject:
         else:
             st.error("Please enter a note!")
 
-    # Display existing notes
+    # Display existing notes with delete options
     st.subheader("Your Notes:")
     for i, note in enumerate(notes[selected_subject], 1):
-        st.write(f"{i}. {note}")
+        col1, col2 = st.columns([4, 1])
+        with col1:
+            st.write(f"{i}. {note}")
+        with col2:
+            if st.button(f"Delete {i}", key=f"delete_{i}"):
+                # Remove the note at index (i-1)
+                notes[selected_subject].pop(i - 1)
+                save_notes(notes)
+                st.success(f"Note {i} deleted!")
+                st.experimental_rerun()  # Refresh the app to reflect changes
 else:
     st.info("Please add or select a subject/preference to start taking notes.")
