@@ -17,6 +17,10 @@ def save_notes(notes):
 # Load existing notes
 notes = load_notes()
 
+# Initialize session state for the text area
+if "new_note" not in st.session_state:
+    st.session_state.new_note = ""
+
 # Streamlit app
 st.title("Note Taking App")
 
@@ -42,12 +46,15 @@ if selected_subject:
     st.header(f"Notes for {selected_subject}")
 
     # Text area for adding a new note
-    new_note = st.text_area("Add a new note:")
+    new_note = st.text_area("Add a new note:", value=st.session_state.new_note, key="new_note")
     if st.button("Save Note"):
         if new_note:
             notes[selected_subject].append(new_note)
             save_notes(notes)
             st.success("Note saved!")
+            # Clear the text area after saving
+            st.session_state.new_note = ""
+            st.experimental_rerun()  # Refresh the app to reflect changes
         else:
             st.error("Please enter a note!")
 
@@ -63,6 +70,6 @@ if selected_subject:
                 notes[selected_subject].pop(i - 1)
                 save_notes(notes)
                 st.success(f"Note {i} deleted!")
-                  # Refresh the app to reflect changes
+                st.experimental_rerun()  # Refresh the app to reflect changes
 else:
     st.info("Please add or select a subject/preference to start taking notes.")
