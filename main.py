@@ -70,6 +70,6 @@ if selected_subject:
                 notes[selected_subject].pop(i - 1)
                 save_notes(notes)
                 st.success(f"Note {i} deleted!")
-                st.experimental_rerun()  # Refresh the app to reflect changes
+                  # Refresh the app to reflect changes
 else:
     st.info("Please add or select a subject/preference to start taking notes.")
