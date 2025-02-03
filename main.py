@@ -54,7 +54,7 @@ if selected_subject:
             st.success("Note saved!")
             # Clear the text area after saving
             st.session_state.new_note = ""
-            st.experimental_rerun()  # Refresh the app to reflect changes
+            # Refresh the app to reflect changes
         else:
             st.error("Please enter a note!")
 
