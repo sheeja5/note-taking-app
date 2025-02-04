@@ -9,7 +9,14 @@ from PIL import Image
 def load_notes():
     if os.path.exists("notes.json"):
         with open("notes.json", "r") as file:
-            return json.load(file)
+            try:
+                data = json.load(file)
+                # Ensure all notes are dictionaries
+                for subject in data:
+                    data[subject] = [note if isinstance(note, dict) else {"text": note, "image": None} for note in data[subject]]
+                return data
+            except json.JSONDecodeError:
+                return {}
     return {}
 
 # Function to save notes to a file
@@ -75,17 +82,18 @@ if selected_subject:
             # Clear the text area and image uploader after saving
             st.session_state.new_note = ""
             st.session_state.new_image = None
-            st.experimental_rerun()
         else:
             st.error("Please enter a note or upload an image!")
 
     # Display existing notes with delete options
     st.subheader("Your Notes:")
     for i, note in enumerate(notes[selected_subject], 1):
+        if not isinstance(note, dict):
+            note = {"text": str(note), "image": None}  # Convert string to a proper dictionary
         col1, col2 = st.columns([4, 1])
         with col1:
             st.write(f"{i}. {note['text']}")
-            if note["image"]:
+            if note.get("image"):
                 image_data = base64.b64decode(note["image"])
                 image = Image.open(BytesIO(image_data))
                 st.image(image, format="JPEG")
@@ -95,6 +103,5 @@ if selected_subject:
                 notes[selected_subject].pop(i - 1)
                 save_notes(notes)
                 st.success(f"Note {i} deleted!")
-                st.experimental_rerun()
 else:
     st.info("Please add or select a subject/preference to start taking notes.")
