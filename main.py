@@ -96,7 +96,7 @@ if selected_subject:
             if note.get("image"):
                 image_data = base64.b64decode(note["image"])
                 image = Image.open(BytesIO(image_data))
-                st.image(image, format="JPEG")
+                st.image(image,JPEG)
         with col2:
             if st.button(f"Delete {i}", key=f"delete_{i}"):
                 # Remove the note at index (i-1)
