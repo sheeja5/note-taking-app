@@ -41,7 +41,7 @@ st.title("Note Taking App")
 
 query = st.text_input("Search in google:")
 if query:
-    search_url = f"https://google.com/?q={query}"
+    search_url = f"https://google.com/?q=+{query}"
     webbrowser.open(search_url)
     st.write(f"Searching for: {query}")
 # Sidebar for selecting subject/preference
