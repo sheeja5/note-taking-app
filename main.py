@@ -4,7 +4,7 @@ import json
 import base64
 from io import BytesIO
 from PIL import Image
-
+import webbrowser
 # Function to load notes from a file
 def load_notes():
     if os.path.exists("notes.json"):
@@ -38,6 +38,12 @@ if "new_image" not in st.session_state:
 # Streamlit app
 st.title("Note Taking App")
 
+
+query = st.text_input("Search in ChatGPT:")
+if query:
+    search_url = f"https://chat.openai.com/?q={query}"
+    webbrowser.open(search_url)
+    st.write(f"Searching for: {query}")
 # Sidebar for selecting subject/preference
 st.sidebar.header("Subjects/Preferences")
 subject = st.sidebar.text_input("Enter a new subject/preference:")
