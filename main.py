@@ -66,7 +66,7 @@ else:
     st.sidebar.info("No subjects available. Add one first!")
     selected_subject = None
 
-st.write("**Supporting Noty portal as well by (Abel)**")
+#st.write("**Supporting Noty portal as well by (Abel)**")
 
 # Main area for adding and viewing notes
 if selected_subject:
