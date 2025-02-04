@@ -87,15 +87,16 @@ if selected_subject:
         else:
             st.error("Please enter a note or upload an image!")
             
-query = st.text_input("Ask AI:")
-if query:
-    genai.configure(api_key="AIzaSyCpHvjqqleMZhHQ29gtjv8ehGWIqzPEbus")
-    model = genai.GenerativeModel("gemini-1.5-flash")
-    response = model.generate_content(query)
-    st.write(response.text)
 
     # Display existing notes with delete options
     st.subheader("Your Notes:")
+    query = st.text_input("Ask AI:")
+    if query:
+       genai.configure(api_key="AIzaSyCpHvjqqleMZhHQ29gtjv8ehGWIqzPEbus")
+       model = genai.GenerativeModel("gemini-1.5-flash")
+       response = model.generate_content(query)
+       st.write(response.text)
+
     for i, note in enumerate(notes[selected_subject], 1):
         if not isinstance(note, dict):
             note = {"text": str(note), "image": None}  # Convert string to a proper dictionary
