@@ -63,12 +63,12 @@ else:
     selected_subject = None
 
 #st.write("**Supporting Noty portal as well by (Abel)**") 
-    query = st.text_input("Ask AI:")
-    if query:
-       genai.configure(api_key="AIzaSyCpHvjqqleMZhHQ29gtjv8ehGWIqzPEbus")
-       model = genai.GenerativeModel("gemini-1.5-flash")
-       response = model.generate_content(query)
-       st.write(response.text)
+query = st.text_input("Ask AI:")
+if query:
+   genai.configure(api_key="AIzaSyCpHvjqqleMZhHQ29gtjv8ehGWIqzPEbus")
+   model = genai.GenerativeModel("gemini-1.5-flash")
+   response = model.generate_content(query)
+   st.write(response.text)
 
 # Main area for adding and viewing notes
 if selected_subject:
