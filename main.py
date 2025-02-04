@@ -87,7 +87,7 @@ if selected_subject:
         else:
             st.error("Please enter a note or upload an image!")
             
-   query = st.text_input("Ask AI:")
+query = st.text_input("Ask AI:")
 if query:
     genai.configure(api_key="AIzaSyCpHvjqqleMZhHQ29gtjv8ehGWIqzPEbus")
     model = genai.GenerativeModel("gemini-1.5-flash")
