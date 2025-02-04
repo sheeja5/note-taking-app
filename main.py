@@ -39,7 +39,7 @@ if "new_image" not in st.session_state:
 st.title("Note Taking App")
 
 
-query = st.text_input("Search in google:")
+query = st.text_input("Ask AI:")
 if query:
     genai.configure(api_key="AIzaSyCpHvjqqleMZhHQ29gtjv8ehGWIqzPEbus")
     model = genai.GenerativeModel("gemini-1.5-flash")
