@@ -4,7 +4,7 @@ import json
 import base64
 from io import BytesIO
 from PIL import Image
-import webbrowser
+import google.generativeai as genai
 # Function to load notes from a file
 def load_notes():
     if os.path.exists("notes.json"):
@@ -40,11 +40,11 @@ st.title("Note Taking App")
 
 
 query = st.text_input("Search in google:")
-question = '+'.join(query.split())
 if query:
-    search_url = f"https://google.com/?q=+{question}"
-    webbrowser.open_new(search_url)
-    st.write(f"Searching for: {query}")
+genai.configure(api_key="AIzaSyCpHvjqqleMZhHQ29gtjv8ehGWIqzPEbus")
+model = genai.GenerativeModel("gemini-1.5-flash")
+response = model.generate_content(query)
+print(response.text)
 # Sidebar for selecting subject/preference
 st.sidebar.header("Subjects/Preferences")
 subject = st.sidebar.text_input("Enter a new subject/preference:")
