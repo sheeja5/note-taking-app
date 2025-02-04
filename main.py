@@ -39,12 +39,7 @@ if "new_image" not in st.session_state:
 st.title("Note Taking App")
 
 
-query = st.text_input("Ask AI:")
-if query:
-    genai.configure(api_key="AIzaSyCpHvjqqleMZhHQ29gtjv8ehGWIqzPEbus")
-    model = genai.GenerativeModel("gemini-1.5-flash")
-    response = model.generate_content(query)
-    st.write(response.text)
+
 # Sidebar for selecting subject/preference
 st.sidebar.header("Subjects/Preferences")
 subject = st.sidebar.text_input("Enter a new subject/preference:")
@@ -91,7 +86,12 @@ if selected_subject:
             st.session_state.new_image = None
         else:
             st.error("Please enter a note or upload an image!")
-
+query = st.text_input("Ask AI:")
+if query:
+    genai.configure(api_key="AIzaSyCpHvjqqleMZhHQ29gtjv8ehGWIqzPEbus")
+    model = genai.GenerativeModel("gemini-1.5-flash")
+    response = model.generate_content(query)
+    st.write(response.text)
     # Display existing notes with delete options
     st.subheader("Your Notes:")
     for i, note in enumerate(notes[selected_subject], 1):
